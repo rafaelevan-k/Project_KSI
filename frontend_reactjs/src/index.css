@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #C9B59C;
+  --color-brand-secondary: #D9CFC7;
+  --color-brand-accent: #EFE9E3;
+  --color-brand-bg: #F9F8F6;
+
+  --font-inter: "Inter", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+
+  --background-image-gradient-main: linear-gradient(135deg, #C9B59C 0%, #D9CFC7 100%);
+  --background-image-gradient-soft: linear-gradient(135deg, #D9CFC7 0%, #EFE9E3 100%);
+  --background-image-gradient-light: linear-gradient(135deg, #EFE9E3 0%, #F9F8F6 100%);
+}
+
+:root {
+  background-color: #F9F8F6;
+  color: #333;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-inter);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-roboto);
+}

@@ -39,7 +39,7 @@ const ForgotPasswordPage: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden p-10 z-10"
+        className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 z-10"
       >
         <Link to="/login" className="inline-flex items-center space-x-2 text-sm font-semibold text-gray-400 hover:text-brand-primary transition-colors mb-8">
           <ArrowLeft size={16} />

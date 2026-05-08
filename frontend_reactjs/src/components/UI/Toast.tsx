@@ -37,10 +37,12 @@ const Toast: React.FC<ToastProps> = ({ message, type, isVisible, onClose }) => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0, y: 50, x: '-50%' }}
-          animate={{ opacity: 1, y: 0, x: '-50%' }}
-          exit={{ opacity: 0, y: 20, x: '-50%' }}
-          className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] flex items-center space-x-4 px-6 py-4 rounded-2xl border shadow-xl ${bgColors[type]} min-w-[320px]`}
+          initial={{ opacity: 0, y: -20, x: 0 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          exit={{ opacity: 0, y: -20, x: 0 }}
+          className={`fixed top-4 z-[100] flex items-center space-x-3 md:space-x-4 px-4 py-3 md:px-6 md:py-4 rounded-2xl border shadow-xl ${bgColors[type]} 
+            w-[calc(100%-2rem)] md:w-auto md:min-w-[320px] max-w-[calc(100%-2rem)] md:max-w-md
+            inset-x-0 mx-auto md:inset-x-auto md:right-8 md:mx-0`}
         >
           <div className="flex-shrink-0">{icons[type]}</div>
           <div className="flex-1 text-sm font-semibold text-gray-700">{message}</div>

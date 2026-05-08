@@ -29,18 +29,19 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ isOpen, onClose, 
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 30 }}
             transition={{ type: "spring", damping: 20, stiffness: 250 }}
-            className="relative w-full max-w-md bg-[#F9F8F6] rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden z-10 border border-[#EFE9E3]"
+            className="relative w-full max-w-md bg-[#F9F8F6] rounded-[2rem] md:rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden z-10 border border-[#EFE9E3]"
           >
-            <div className="p-10">
-              <div className="flex justify-between items-start mb-8">
-                <div className={`p-5 rounded-[1.5rem] ${type === "danger" ? "bg-red-50 text-red-500" : "bg-[#C9B59C]/10 text-[#C9B59C]"}`}>{type === "danger" ? <LogOut size={36} /> : <AlertCircle size={36} />}</div>
-                <button onClick={onClose} className="p-3 text-[#C9B59C]/40 hover:text-[#C9B59C] hover:bg-[#C9B59C]/5 rounded-2xl transition-all">
-                  <X size={24} />
+            <div className="p-6 md:p-10">
+              <div className="flex justify-between items-start mb-6 md:mb-8">
+                <div className={`p-4 md:p-5 rounded-[1.25rem] md:rounded-[1.5rem] ${type === "danger" ? "bg-red-50 text-red-500" : "bg-[#C9B59C]/10 text-[#C9B59C]"}`}>
+                  {type === "danger" ? <LogOut className="w-7 h-7 md:w-9 md:h-9" /> : <AlertCircle className="w-7 h-7 md:w-9 md:h-9" />}
+                </div>
+                <button onClick={onClose} className="p-2 md:p-3 text-[#C9B59C]/40 hover:text-[#C9B59C] hover:bg-[#C9B59C]/5 rounded-2xl transition-all">
+                  <X size={20} className="md:w-6 md:h-6" />
                 </button>
               </div>
-
-              <h3 className="text-3xl font-extrabold text-[#333] mb-3 tracking-tight leading-tight text-center">{title}</h3>
-              <p className="text-[#333]/60 font-medium leading-relaxed mb-10 text-lg text-center">{message}</p>
+              <h3 className="text-2xl md:text-3xl font-extrabold text-[#333] mb-3 tracking-tight leading-tight text-center">{title}</h3>
+              <p className="text-[#333]/60 font-medium leading-relaxed mb-8 md:mb-10 text-base md:text-lg text-center">{message}</p>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <button onClick={onClose} className="flex-1 px-8 py-4.5 bg-[#D9CFC7]/20 text-[#C9B59C] rounded-[1.25rem] font-bold hover:bg-[#D9CFC7]/30 transition-all active:scale-95">

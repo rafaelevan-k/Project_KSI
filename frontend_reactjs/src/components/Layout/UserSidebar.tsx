@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Shield, History, Settings, LogOut, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, Shield, History, Settings, LogOut, ChevronRight, X } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import ConfirmationModal from '../UI/ConfirmationModal';
 
-const UserSidebar: React.FC = () => {
+interface UserSidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const UserSidebar: React.FC<UserSidebarProps> = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const logout = useAuthStore((state) => state.logout);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
@@ -21,15 +26,21 @@ const UserSidebar: React.FC = () => {
     navigate('/login');
   };
 
-  return (
-    <aside className="w-72 bg-white border-r border-gray-100 flex flex-col h-screen sticky top-0">
-      <div className="h-20 flex items-center px-8">
+  const SidebarContent = () => (
+    <>
+      <div className="h-20 flex items-center justify-between px-8">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-brand-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-brand-primary/20">
             <Shield size={24} />
           </div>
           <span className="text-xl font-bold text-brand-primary tracking-tighter uppercase">KSI Project</span>
         </div>
+        <button 
+          onClick={onClose}
+          className="lg:hidden p-2 text-gray-400 hover:text-brand-primary transition-colors"
+        >
+          <X size={24} />
+        </button>
       </div>
 
       <div className="flex-1 px-4 py-6 space-y-2">
@@ -37,6 +48,9 @@ const UserSidebar: React.FC = () => {
           <NavLink
             key={index}
             to={item.path}
+            onClick={() => {
+              if (window.innerWidth < 1024) onClose();
+            }}
             className={({ isActive }) => `
               flex items-center justify-between px-4 py-3.5 rounded-2xl transition-all duration-300 group
               ${isActive 
@@ -67,6 +81,23 @@ const UserSidebar: React.FC = () => {
           </button>
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <>
+      {/* Desktop Sidebar */}
+      <aside className="hidden lg:flex w-72 bg-white border-r border-gray-100 flex-col h-screen sticky top-0">
+        <SidebarContent />
+      </aside>
+
+      {/* Mobile Sidebar */}
+      <aside className={`
+        fixed inset-y-0 left-0 z-50 w-72 bg-white flex flex-col transition-transform duration-300 transform lg:hidden
+        ${isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'}
+      `}>
+        <SidebarContent />
+      </aside>
 
       <ConfirmationModal
         isOpen={isLogoutModalOpen}
@@ -77,7 +108,7 @@ const UserSidebar: React.FC = () => {
         confirmText="Sign Out"
         type="danger"
       />
-    </aside>
+    </>
   );
 };
 

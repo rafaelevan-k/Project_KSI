@@ -51,7 +51,7 @@ const VerifyEmailPage: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-10 text-center"
+        className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 md:p-10 text-center"
       >
         <div className="flex justify-center mb-6">
           {status === 'loading' && <Loader2 className="text-brand-primary animate-spin" size={64} />}

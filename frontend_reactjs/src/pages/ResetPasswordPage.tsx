@@ -58,7 +58,7 @@ const ResetPasswordPage: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden p-10 z-10"
+        className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 z-10"
       >
         <h1 className="text-3xl font-bold text-gray-800 mb-2 font-roboto">Reset Password</h1>
         <p className="text-gray-500 font-medium mb-8">Please enter your new password below.</p>

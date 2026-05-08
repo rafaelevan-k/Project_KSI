@@ -61,22 +61,22 @@ const LoginPage = () => {
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-gradient-to-br from-brand-primary/20 to-transparent rounded-full blur-3xl" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-gradient-to-tl from-brand-secondary/20 to-transparent rounded-full blur-3xl" />
 
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row z-10">
-        <div className="w-full md:w-1/2 bg-white bg-cover bg-center relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/80 to-brand-secondary/80 flex flex-col justify-center p-12 text-gray-700">
-            <motion.h2 key={isLogin ? "login-title" : "signup-title"} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="text-4xl font-semibold mb-6 font-roboto">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row z-10 m-2 md:m-0">
+        <div className="w-full md:w-1/2 bg-white bg-cover bg-center relative min-h-[200px] md:min-h-full">
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/80 to-brand-secondary/80 flex flex-col justify-center p-6 md:p-12 text-gray-700">
+            <motion.h2 key={isLogin ? "login-title" : "signup-title"} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="text-2xl md:text-4xl font-semibold mb-2 md:mb-6 font-roboto">
               {isLogin ? "Welcome Back!" : "Join Our Community"}
             </motion.h2>
-            <p className="text-gray-700 text-lg mb-8 font-medium">{isLogin ? "To keep connected with us please login with your personal info." : "Enter your personal details and start your journey with us."}</p>
-            <button onClick={() => setIsLogin(!isLogin)} className="w-fit px-8 py-3 border-2 border-white rounded-full font-medium hover:bg-white hover:text-brand-primary transition-all duration-300">
+            <p className="text-gray-700 text-sm md:text-lg mb-4 md:mb-8 font-medium">{isLogin ? "To keep connected with us please login with your personal info." : "Enter your personal details and start your journey with us."}</p>
+            <button onClick={() => setIsLogin(!isLogin)} className="w-fit px-6 py-2 md:px-8 md:py-3 border-2 border-white rounded-full font-medium hover:bg-white hover:text-brand-primary transition-all duration-300 text-xs md:text-base">
               {isLogin ? "SIGN UP" : "SIGN IN"}
             </button>
           </div>
         </div>
 
-        <div className="w-full md:w-1/2 p-12 bg-white">
-          <div className="flex justify-between items-center mb-10">
-            <h1 className="text-3xl font-semibold text-gray-800 font-roboto">{isLogin ? "Sign In" : "Create Account"}</h1>
+        <div className="w-full md:w-1/2 p-6 md:p-12 bg-white">
+          <div className="flex justify-between items-center mb-6 md:mb-10">
+            <h1 className="text-2xl md:text-3xl font-semibold text-gray-800 font-roboto">{isLogin ? "Sign In" : "Create Account"}</h1>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">

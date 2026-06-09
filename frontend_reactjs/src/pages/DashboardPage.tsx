@@ -7,15 +7,27 @@ const DashboardPage: React.FC = () => {
   const user = useAuthStore((state) => state.user);
 
   const stats = [
-    { 
-      icon: user?.security_level === 'low' ? ShieldAlert : ShieldCheck, 
-      label: "Security Level", 
-      value: user?.security_level === 'low' ? "Low" : "Normal", 
-      color: user?.security_level === 'low' ? "text-red-500" : "text-green-500", 
-      bg: user?.security_level === 'low' ? "bg-red-50" : "bg-green-50" 
+    {
+      icon: user?.security_level === "low" ? ShieldAlert : ShieldCheck,
+      label: "Security Level",
+      value: user?.security_level === "low" ? "Vulnerable" : "Protected",
+      color: user?.security_level === "low" ? "text-red-500" : "text-green-600",
+      bg: user?.security_level === "low" ? "bg-red-50" : "bg-green-50",
     },
-    { icon: Activity, label: "Last Activity", value: "Login Successful", color: "text-blue-500", bg: "bg-blue-50" },
-    { icon: Key, label: "Active Tokens", value: "1 Session", color: "text-brand-primary", bg: "bg-brand-primary/5" },
+    {
+      icon: Activity,
+      label: "Network Connection",
+      value: window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? "Localhost" : `IP: ${window.location.hostname}`,
+      color: "text-blue-500",
+      bg: "bg-blue-50",
+    },
+    {
+      icon: UserIcon,
+      label: "Account Status",
+      value: "Member (Active)",
+      color: "text-brand-primary",
+      bg: "bg-brand-primary/5",
+    },
   ];
 
   return (

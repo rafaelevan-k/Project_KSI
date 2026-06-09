@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://172.20.10.5:8000/api",
+  baseURL: `http://${window.location.hostname}:8000/api`,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -15,6 +15,20 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && (error.response.status === 401 || error.response.status === 419)) {
+      localStorage.removeItem("auth_token");
+      localStorage.removeItem("user");
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login?expired=1";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const login = async (credentials: any) => {
   const response = await api.post("/login", credentials);
@@ -36,6 +50,11 @@ export const forgotPassword = async (email: string) => {
 
 export const resetPassword = async (data: any) => {
   const response = await api.post("/reset-password", data);
+  return response.data;
+};
+
+export const changePassword = async (data: any) => {
+  const response = await api.post("/change-password", data);
   return response.data;
 };
 
@@ -64,12 +83,12 @@ export const setSecurityLevel = async (level: "low" | "normal") => {
 };
 
 export const testSqlInjection = async (id: string) => {
-  const response = await api.get(`/vulnerable/sql-injection?id=${id}`);
+  const response = await api.get("/vulnerable/sql-injection", { params: { id } });
   return response.data;
 };
 
 export const testXss = async (name: string) => {
-  const response = await api.get(`/vulnerable/xss?name=${name}`);
+  const response = await api.get("/vulnerable/xss", { params: { name } });
   return response.data;
 };
 

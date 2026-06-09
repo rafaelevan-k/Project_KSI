@@ -133,7 +133,15 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        if (Auth::guard('web')->check()) {
+            Auth::guard('web')->logout();
+        }
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        if ($request->user()) {
+            $request->user()->currentAccessToken()->delete();
+        }
 
         return response()->json([
             'message' => 'Logged out successfully',
@@ -143,5 +151,29 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return response()->json($request->user());
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = $request->user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => ['The provided password does not match our records.'],
+            ]);
+        }
+
+        $user->forceFill([
+            'password' => Hash::make($request->new_password)
+        ])->save();
+
+        return response()->json([
+            'message' => 'Password changed successfully',
+        ]);
     }
 }

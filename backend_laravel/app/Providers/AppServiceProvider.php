@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         ResetPassword::createUrlUsing(function ($user, string $token) {
-            return env('FRONTEND_URL', 'http://localhost:5173') . '/reset-password?token=' . $token . '&email=' . $user->email;
+            return config('app.frontend_url') . '/reset-password?token=' . $token . '&email=' . urlencode($user->email);
         });
 
         VerifyEmail::createUrlUsing(function ($user) {
@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
                 ]
             );
 
-            return env('FRONTEND_URL', 'http://localhost:5173') . '/verify-email?url=' . urlencode($url);
+            return config('app.frontend_url') . '/verify-email?url=' . urlencode($url);
         });
     }
 }
